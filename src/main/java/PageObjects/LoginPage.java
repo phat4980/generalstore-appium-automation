@@ -41,12 +41,30 @@ public class LoginPage extends Actions {
     }
 
     public void setGender(String gender) {
-        if(gender.contains("male")) {
-            maleGender.click();
-        } else {
-            femaleGender.click();
+        if (gender.contains("male")) {
+            if (!maleGender.isSelected()) {
+                maleGender.click();
+            }
+        } else if (gender.contains("female")) {
+            if (!femaleGender.isSelected()) {
+                femaleGender.click();
+            }
         }
     }
+
+    public String getGender() {
+        String maleChecked = maleGender.getAttribute("checked"); // Returns "true" if selected
+        String femaleChecked = femaleGender.getAttribute("checked");
+
+        if ("true".equals(maleChecked)) {
+            return "Male";
+        } else if ("true".equals(femaleChecked)) {
+            return "Female";
+        }
+        return "none";
+    }
+
+
     public void setCountrySelector(String countryName) {
         countrySelector.click();
         scrollToText(countryName);

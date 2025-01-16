@@ -35,7 +35,17 @@ public class BaseTest {
 
     @AfterClass
     public void tearDown() {
-        driver.quit();
-        service.stop();
+        try {
+            if (driver != null) {
+                driver.quit();
+                System.out.println("Driver quit successfully.");
+            }
+            if (service != null) {
+                service.stop();
+                System.out.println("Appium Server stopped.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error during teardown: " + e.getMessage());
+        }
     }
 }
